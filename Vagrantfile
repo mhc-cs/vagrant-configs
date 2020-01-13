@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+username = `whoami`.chomp # you need chomp as the result of the command executed this way returns \n at the end
+myhostname = "#{username}-linux-vm"
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.provision :shell, path: "install-extras.sh"
+  
+  # this works:
+  config.vm.hostname = "#{myhostname}"
+  
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "#{myhostname}"
+  end
+
+  config.vm.synced_folder "./shared", "/shared", create: true
+
+end
+
+
