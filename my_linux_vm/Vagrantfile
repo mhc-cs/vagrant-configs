@@ -19,6 +19,11 @@ Vagrant.configure("2") do |config|
     v.name = "#{myhostname}"
   end
 
+  config.trigger.after :up  do |updatePkgs|
+  	updatePkgs.warn = "Checking for software updates"
+  	updatePkgs.run_remote = {inline: "apt-get upgrade -y"}
+  end
+
   config.vm.synced_folder "./shared", "/shared", create: true
 
 end
