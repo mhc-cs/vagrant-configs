@@ -5,6 +5,10 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+
+
+## THIS IS THE VAGRANTFILE FOR 'linux-anaconda-vm'
+
 username = `whoami`.chomp # you need chomp as the result of the command executed this way returns \n at the end
 myDate = `date +%Y-%m-%d-%H.%M.%S`.chomp
 myhostname = "#{username}-linux-anaconda-vm-#{myDate}"
@@ -38,6 +42,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "#{myhostname}"
   config.vm.provider "virtualbox" do |v|
     v.name = "#{myhostname}"
+  end
+
+  config.trigger.after :up  do |updatePkgs|
+    updatePkgs.warn = "Checking for software updates"
+    updatePkgs.run_remote = {inline: "apt-get --with-new-pkgs upgrade -y"}
   end
 
   # create shared folder
