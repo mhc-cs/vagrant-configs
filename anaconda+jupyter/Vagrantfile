@@ -9,9 +9,14 @@
 
 ## THIS IS THE VAGRANTFILE FOR 'linux-anaconda-vm'
 
-username = `whoami`.chomp # you need chomp as the result of the command executed this way returns \n at the end
-# myDate = `date +%Y-%m-%d-%H.%M.%S`.chomp
-myhostname = "#{username}-linux-anaconda-vm"
+# create a vm with username and timestamp appended (to avoid duplicate names)
+
+  require 'date'
+
+  username = ENV['USERNAME'] || ENV['USER']
+  myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
+  myhostname = "#{username}-linux-anaconda-vm-#{myDate}"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
 
@@ -38,7 +43,7 @@ Vagrant.configure("2") do |config|
   # set port forwarding for jupyter notebook to work
   config.vm.network "forwarded_port", guest: 8888, host: 8888
   
-  # set hostname based on username from line 8:
+  # set hostname based on username from line 16
   config.vm.hostname = "#{myhostname}"
   config.vm.provider "virtualbox" do |v|
     v.name = "#{myhostname}"
