@@ -8,16 +8,18 @@
 
 ## THIS IS THE VAGRANTFILE FOR GENERIC 'my-linux-vm'
 
-username = `whoami`.chomp # you need chomp as the result of the command executed this way returns \n at the end
-# myDate = `date +%Y-%m-%d-%H.%M.%S`.chomp
-myhostname = "#{username}-linux-vm"
+# create a vm with username and timestamp appended (to avoid duplicate names)
+
+  require 'date'
+
+  username = ENV['USERNAME'] || ENV['USER']
+  myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
+  myhostname = "#{username}-linux-vm-#{myDate}"
+
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
-  config.vm.provision :shell, path: "install-extras.sh"
-  
-  # this works:
   config.vm.hostname = "#{myhostname}"
-  
+  config.vm.provision :shell, path: "install-extras.sh"
   config.vm.provider "virtualbox" do |v|
     v.name = "#{myhostname}"
   end
