@@ -19,7 +19,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "mhc-cs/MHC221-ubuntu-xfce.box"
   config.vm.hostname = "#{myhostname}"
-  if Vagrant.has_plugin?("vagrant-timezone")
+  if Vagrant.has_plugin?("vagrant-timezone") ## sync the guest clock to host if timezone plugin is installed
     config.timezone.value = :host
   end
 
