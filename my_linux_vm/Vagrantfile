@@ -19,6 +19,9 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/bionic64"
   config.vm.hostname = "#{myhostname}"
+    if Vagrant.has_plugin?("vagrant-timezone") ## sync the guest clock to host if timezone plugin is installed
+    config.timezone.value = :host
+  end
   config.vm.provision :shell, path: "install-extras.sh"
   config.vm.provider "virtualbox" do |v|
     v.name = "#{myhostname}"
