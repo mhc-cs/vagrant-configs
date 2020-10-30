@@ -15,7 +15,7 @@
 
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
-  myhostname = "#{username}-linux-anaconda-vm-#{myDate}"
+  myhostname = "#{username.gsub(/\s/, "-")}-linux-anaconda-vm-#{myDate}"
 
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-20.04"
