@@ -19,7 +19,7 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "mhc-cs/Ubuntu-20-04-Xfce"
-  config.vm.hostname = "#{myhostname}"
+  config.vm.hostname = "#{myhostname.gsub(/\s/, "")}"
   config.vagrant.plugins = ["vagrant-timezone", "vagrant-vbguest"]
   config.ssh.insert_key = false
 
