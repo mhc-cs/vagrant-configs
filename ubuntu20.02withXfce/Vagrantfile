@@ -14,12 +14,12 @@
 
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
-  myhostname = "#{username}-UbuntuXfce-vm-#{myDate}"
+  myhostname = "#{username.gsub(/\s/, "-")}-UbuntuXfce-vm-#{myDate}"
 
 Vagrant.configure("2") do |config|
 
   config.vm.box = "mhc-cs/Ubuntu-20-04-Xfce"
-  config.vm.hostname = "#{myhostname.gsub(/\s/, "-")}"
+  config.vm.hostname = "#{myhostname}"
   config.vagrant.plugins = ["vagrant-timezone", "vagrant-vbguest"]
   config.ssh.insert_key = false
 
