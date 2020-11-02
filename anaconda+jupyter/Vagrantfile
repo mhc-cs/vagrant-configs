@@ -6,13 +6,13 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 
-
 ## THIS IS THE VAGRANTFILE FOR 'linux-anaconda-vm'
 
+# install missing plugins without asking user permission
+  ENV['VAGRANT_INSTALL_LOCAL_PLUGINS'] = "true"
+
 # create a vm with username and timestamp appended (to avoid duplicate names)
-
   require 'date'
-
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
   myhostname = "#{username.gsub(/\s/, "-")}-linux-anaconda-vm-#{myDate}"
