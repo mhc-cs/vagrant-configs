@@ -1,5 +1,8 @@
 # vagrant-configs
 Vagrant config files for MHC CS students
 
-Use 'my_linux_vm' if you're just getting started. Use 'anaconda+jupyter' to use Python with Jupyter tools.
+'my_linux_vm' is a basic Ubuntu Linux VM. Try this one if you're just getting started. (no GUI on this virtual machine)
 
+'anaconda+jupyter' has anaconda + Jupyter tools baked in. Use this one for Python programming. (this one also has no GUI)
+
+'ubuntu20.02withXfce' is an Ubuntu VM with minimal Xfce GUI installed.
