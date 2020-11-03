@@ -8,15 +8,13 @@
 
 ## THIS IS THE VAGRANTFILE FOR "mhc-cs/MHC221-ubuntu-xfce"
 
-# install missing plugins without asking user permission
-  ENV['VAGRANT_INSTALL_LOCAL_PLUGINS'] = "true"
-
 # create a vm with username and timestamp appended (to avoid duplicate names)
 
   require 'date'
+
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
-  myhostname = "#{username.gsub(/\s/, "-")}-UbuntuXfce-vm-#{myDate}"
+  myhostname = "#{username}-UbuntuXfce-vm-#{myDate}"
 
 Vagrant.configure("2") do |config|
 
@@ -38,11 +36,14 @@ Vagrant.configure("2") do |config|
   end
 
   config.trigger.after :up  do |updatePkgs|
+
+    ## add Atom repository
+    config.vm.provision "shell", inline: "apt-get install -qy software-properties-common apt-transport-https wget && wget -q https://packagecloud.io/AtomEditor/atom/gpgkey -O- | sudo apt-key add - && sudo add-apt-repository 'deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main' ; ", privileged: true 
     updatePkgs.warn = "Checking for software updates"
-    updatePkgs.run_remote = {inline: "apt-get --with-new-pkgs upgrade -y"}
+    updatePkgs.run_remote = {inline: "apt-get --with-new-pkgs upgrade -qy"}
+    updatePkgs.run_remote = {inline: "apt-get update -qy"}
   end
   
   config.vm.synced_folder "./shared", "/home/vagrant/Desktop/shared", create: true
 
 end
-
