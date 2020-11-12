@@ -36,12 +36,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.trigger.after :up  do |updatePkgs|
-
-    ## add Atom repository
-    config.vm.provision "shell", inline: "apt-get install -qy software-properties-common apt-transport-https wget && wget -q https://packagecloud.io/AtomEditor/atom/gpgkey -O- | sudo apt-key add - && sudo add-apt-repository 'deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main' ; ", privileged: true 
-    updatePkgs.warn = "Checking for software updates"
-    updatePkgs.run_remote = {inline: "apt-get --with-new-pkgs upgrade -qy"}
-    updatePkgs.run_remote = {inline: "apt-get update -qy"}
   end
   
   config.vm.synced_folder "./shared", "/home/vagrant/Desktop/shared", create: true
