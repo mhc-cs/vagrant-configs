@@ -14,7 +14,8 @@
 
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
-  myhostname = "#{username}-UbuntuXfce-vm-#{myDate}"
+#  myhostname = "#{username}-UbuntuXfce-vm-#{myDate}"
+  myhostname = "#{username}-UbuntuXfce-vm"
 
 Vagrant.configure("2") do |config|
 
