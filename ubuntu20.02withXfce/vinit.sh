@@ -4,7 +4,7 @@
 
 myDir=$(dirname "$0")
 cd $myDir 
-vagrant halt && 
+vagrant up && vagrant halt && 
 
 declare vmName=$( vboxmanage list vms | cut -f 2 -d " "  | sed 's/^.//' | sed 's/.$//' )
 
@@ -17,5 +17,3 @@ else
 	# restore from existing clean-state snapshot
 	/usr/local/bin/vboxmanage snapshot "$vmName" restore clean-state
 fi
-
-# vagrant up ;
