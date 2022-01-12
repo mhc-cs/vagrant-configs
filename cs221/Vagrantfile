@@ -14,7 +14,7 @@
 
   username = ENV['USERNAME'] || ENV['USER']
   myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
-  myhostname = "cs_221"
+  myhostname = "cs221"
 
 Vagrant.configure("2") do |config|
 
