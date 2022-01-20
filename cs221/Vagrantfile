@@ -8,12 +8,6 @@
 
 ## THIS IS THE VAGRANTFILE FOR "mhc-cs/cs_221" Ubuntu 20.04 with Xfce GUI
 
-# create a vm with username and timestamp appended (to avoid duplicate names)
-
-  require 'date'
-
-  username = ENV['USERNAME'] || ENV['USER']
-  myDate = DateTime.now.strftime('%Y-%m-%d-%H.%M.%S')
   myhostname = "cs221"
 
 Vagrant.configure("2") do |config|
@@ -35,6 +29,8 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--uartmode1", "file", File::NULL]
            # Set the video memory to 64Mb:
     v.customize ["modifyvm", :id, "--vram", "64"]
+           # enable shared clipboard
+    v.customize  ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
   end
 
   config.trigger.after :up  do |updatePkgs|
