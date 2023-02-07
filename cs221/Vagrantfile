@@ -22,9 +22,7 @@ ENV['VAGRANT_INSTALL_LOCAL_PLUGINS'] = "true"
 
 Vagrant.configure("2") do |config|
 
-  ## comment out _one_ of the two following lines depending on where you're installing this VM:
-  config.vm.box = "/Users/Shared/boxes/virtualbox.box" ### uncomment this line if installing on a CS dept lab Mac
-#  config.vm.box = "mhc-cs/Ubuntu-20-04-Xfce" ### uncomment this line if installing on your own computer
+  config.vm.box = "mhc-cs/Ubuntu-20-04-Xfce"
   config.vm.hostname = "#{myhostname}"
   config.vagrant.plugins = ["vagrant-timezone", "vagrant-vbguest"]
   config.ssh.insert_key = false
