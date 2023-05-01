@@ -18,7 +18,7 @@
   myhostname = "#{username.gsub(/\s/, "-")}-linux-anaconda-vm-#{myDate}"
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "bento/ubuntu-22.04"
 
   # install anaconda as user 'vagrant' (not root)
   $script = <<-SCRIPT
