@@ -44,10 +44,10 @@ Vagrant.configure("2") do |config|
   config.trigger.after :up  do |updatePkgs|
   end
 
-  config.vm.synced_folder "./shared", "/home/vagrant/Desktop/shared", create: true, type: "virtualbox", mount_options: ["dmode=770", "fmode=770"]
+  config.vm.synced_folder "./shared", "/home/vagrant/Desktop/shared", create: true, type: "virtualbox", owner: "vagrant", group: "vagrant", mount_options: ["dmode=770", "fmode=770"]
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y openjdk-17-jdk
+    apt-get install -y openjdk-17-jdk net-tools
   SHELL
 end
