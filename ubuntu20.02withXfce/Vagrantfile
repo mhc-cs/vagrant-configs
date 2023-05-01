@@ -51,6 +51,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y openjdk-17-jdk
+    apt-get install -y openjdk-17-jdk net-tools 
   SHELL
 end
