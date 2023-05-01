@@ -19,7 +19,7 @@
   myhostname = "#{username.gsub(/\s/, "-")}-linux-vm-#{myDate}"
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "bento/ubuntu-22.04"
   config.vm.hostname = "#{myhostname}"
     if Vagrant.has_plugin?("vagrant-timezone") ## sync the guest clock to host if timezone plugin is installed
     config.timezone.value = :host
